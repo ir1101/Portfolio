@@ -1,0 +1,129 @@
+/* ---------- Statement (sticky scrub) ---------- */
+
+.stmt {
+  position: relative;
+  height: 230vh;
+}
+.stmt.is-static {
+  height: auto;
+}
+
+.stmt-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: clamp(16px, 2vw, 28px);
+  padding-inline: var(--gutter);
+  text-align: center;
+}
+.stmt.is-static .stmt-sticky {
+  position: relative;
+  height: auto;
+  padding-block: var(--section-pad);
+}
+
+.stmt-kicker,
+.stmt-foot {
+  color: var(--fg-2);
+}
+
+.stmt-text {
+  display: grid;
+  justify-items: center;
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: var(--fs-statement);
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
+}
+
+.stmt-word {
+  display: block;
+  opacity: 0.12;
+  filter: blur(14px);
+  will-change: filter, opacity, transform;
+}
+.stmt.is-static .stmt-word {
+  opacity: 1;
+  filter: none;
+  will-change: auto;
+}
+
+.stmt-dot {
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.stmt.is-static .stmt-dot {
+  opacity: 1;
+}
+
+/* ---------- Body ---------- */
+
+.about-body {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--gutter);
+  padding-top: clamp(64px, 10vw, 140px);
+  background: var(--black);
+}
+
+.about-lead-wrap {
+  grid-column: 1 / span 8;
+}
+
+.about-lead {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: var(--fs-lead);
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+  color: var(--fg-2);
+  text-wrap: pretty;
+  max-width: 34ch;
+}
+.about-lead em {
+  font-style: normal;
+  color: var(--fg);
+}
+
+.facts {
+  grid-column: 10 / span 3;
+  display: grid;
+  align-content: start;
+  gap: 0;
+}
+
+.fact {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+.fact:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.fact dd {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  text-align: right;
+}
+
+@media (max-width: 960px) {
+  .about-lead-wrap,
+  .facts {
+    grid-column: 1 / -1;
+  }
+  .facts {
+    margin-top: 32px;
+  }
+}

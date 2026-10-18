@@ -1,0 +1,74 @@
+.ft {
+  position: relative;
+  z-index: 1;
+  background: var(--black);
+  padding-top: var(--section-pad);
+}
+
+.ft-art {
+  display: grid;
+}
+.ft-ascii {
+  height: clamp(220px, 36vw, 520px);
+  color: rgba(242, 242, 242, 0.62);
+}
+
+.ft-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  padding-top: clamp(40px, 5vw, 72px);
+  padding-bottom: clamp(48px, 6vw, 96px);
+}
+.ft-info .label {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.ft-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: var(--fs-lead);
+  line-height: 1.22;
+  color: var(--fg);
+  max-width: 34ch;
+  text-wrap: pretty;
+}
+
+.ft-strip {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 16px;
+  padding-top: 16px;
+  padding-bottom: calc(var(--header-inset) + 28px);
+  border-top: 1px solid var(--line);
+  margin-inline: var(--gutter);
+  padding-inline: 0;
+}
+.ft-mid {
+  text-align: center;
+}
+.ft-top {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--fg);
+}
+.ft-top svg {
+  color: var(--accent-text);
+  transition: transform 200ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .ft-top:hover svg {
+    transform: translateY(-3px);
+  }
+}
+
+@media (max-width: 640px) {
+  .ft-strip {
+    grid-template-columns: 1fr auto;
+  }
+  .ft-mid {
+    display: none;
+  }
+}

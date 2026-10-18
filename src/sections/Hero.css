@@ -1,0 +1,145 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto auto;
+  padding-top: calc(var(--header-h) + var(--header-inset) * 2);
+}
+
+.hero-center {
+  align-self: center;
+  display: grid;
+  justify-items: center;
+  gap: clamp(12px, 1.6vw, 20px);
+  padding-inline: var(--gutter);
+  text-align: center;
+}
+
+.hero-kicker,
+.hero-sub {
+  color: var(--fg-2);
+}
+
+.hero-name {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--fs-display);
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  color: var(--accent);
+  white-space: nowrap;
+  margin-right: -0.05em;
+}
+
+.hero-letters {
+  display: inline-flex;
+}
+
+.hero-letter {
+  display: inline-block;
+  animation: hero-letter 900ms var(--ease-out) both;
+  animation-delay: calc(200ms + var(--i) * 32ms);
+}
+
+.hero-space {
+  display: inline-block;
+  width: 0.24em;
+}
+
+@keyframes hero-letter {
+  from {
+    opacity: 0;
+    filter: blur(14px);
+    transform: translateY(10%);
+  }
+}
+
+.hero-kicker {
+  animation: hero-fade 700ms ease both 120ms;
+}
+.hero-sub {
+  animation: hero-fade 700ms ease both 560ms;
+}
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.hero-readout {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 7px 12px;
+  background: rgba(15, 15, 15, 0.85);
+  border-radius: 4px;
+  color: var(--fg);
+  font-size: 10px;
+  white-space: nowrap;
+  animation: hero-fade 700ms ease both 900ms;
+}
+.hero-readout-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+}
+
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gutter);
+  padding-top: 16px;
+  padding-bottom: clamp(20px, 3vh, 32px);
+  border-top: 1px solid var(--line);
+  margin-inline: var(--gutter);
+  padding-inline: 0;
+}
+
+.hero-meta-cell {
+  animation: hero-meta 700ms var(--ease-out) both;
+  animation-delay: calc(700ms + var(--i) * 60ms);
+}
+.hero-meta-cell:last-child {
+  text-align: right;
+}
+.hero-meta dt {
+  margin-bottom: 6px;
+}
+.hero-meta dd {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--fg);
+}
+
+@keyframes hero-meta {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (max-width: 760px) {
+  .hero-meta {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 18px;
+  }
+  .hero-meta-cell:last-child {
+    text-align: left;
+  }
+  .hero-readout {
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-letter {
+    animation: hero-fade 500ms ease both;
+  }
+  .hero-meta-cell {
+    animation: hero-fade 500ms ease both;
+  }
+}

@@ -1,0 +1,160 @@
+.contact {
+  background: var(--black);
+}
+
+.ct-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: var(--gutter);
+  padding-bottom: clamp(40px, 5vw, 72px);
+}
+
+.ct-lead {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: var(--fs-lead);
+  line-height: 1.2;
+  color: var(--fg-2);
+  max-width: 30ch;
+  text-wrap: pretty;
+}
+.ct-lead em {
+  font-style: normal;
+  color: var(--fg);
+}
+
+.ct-note {
+  text-align: right;
+}
+
+.ct-list {
+  border-top: 1px solid var(--line);
+}
+
+.ct-row {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--line);
+  isolation: isolate;
+}
+
+/* Blue fill sweeps in from the left on hover; leaves faster than it arrives. */
+.ct-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--accent);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 160ms var(--ease-out);
+}
+
+.ct-link {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 48px 120px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 20px;
+  padding: clamp(20px, 2.6vw, 32px) 12px;
+  transition: transform 160ms var(--ease-out);
+}
+.ct-link:active {
+  transform: scale(0.99);
+}
+
+.ct-v {
+  font-size: clamp(24px, 3.4vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-transform: none;
+  overflow-wrap: anywhere;
+}
+
+.ct-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--fg);
+}
+.ct-action svg {
+  color: var(--accent-text);
+  transition: transform 200ms var(--ease-out);
+}
+
+.ct-copy {
+  display: grid;
+  place-items: center;
+  padding: 0 16px;
+  border-left: 1px solid var(--line);
+  transition:
+    background-color 150ms ease,
+    transform 160ms var(--ease-out);
+}
+.ct-copy-swap {
+  display: grid;
+}
+.ct-copy-swap > * {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--fg);
+  transition:
+    opacity 200ms ease,
+    filter 200ms ease;
+}
+.ct-copy-swap > :last-child,
+.ct-copy-swap[data-copied="true"] > :first-child {
+  opacity: 0;
+  filter: blur(2px);
+}
+.ct-copy-swap[data-copied="true"] > :last-child {
+  opacity: 1;
+  filter: none;
+  color: var(--accent-text);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ct-row:has(.ct-link:hover)::before {
+    clip-path: inset(0 0 0 0);
+    transition-duration: 260ms;
+  }
+  .ct-row:has(.ct-link:hover) .label {
+    color: var(--fg);
+  }
+  .ct-row:has(.ct-link:hover) .ct-action svg {
+    color: var(--fg);
+    transform: translateX(3px);
+  }
+  .ct-copy:hover {
+    background: var(--panel-2);
+  }
+}
+
+@media (max-width: 760px) {
+  .ct-intro {
+    grid-template-columns: 1fr;
+  }
+  .ct-note {
+    text-align: left;
+  }
+  .ct-link {
+    grid-template-columns: 32px minmax(0, 1fr) auto;
+    row-gap: 8px;
+    padding-inline: 4px;
+  }
+  .ct-k {
+    grid-column: 2;
+  }
+  .ct-v {
+    grid-column: 2 / -1;
+    grid-row: 2;
+  }
+  .ct-action {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}

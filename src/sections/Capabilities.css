@@ -1,0 +1,165 @@
+.caps {
+  background: var(--black);
+}
+
+/* ---------- Services ---------- */
+
+.svc {
+  border-top: 1px solid var(--line);
+}
+
+.svc-row {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1.1fr) minmax(0, 1fr) 16px;
+  align-items: baseline;
+  gap: clamp(16px, 2vw, 32px);
+  padding: clamp(24px, 3vw, 40px) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.svc-t {
+  font-size: clamp(30px, 4.2vw, 64px);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+
+.svc-d {
+  color: var(--fg-2);
+  max-width: 44ch;
+  text-wrap: pretty;
+}
+
+.svc-icon {
+  align-self: start;
+  margin-top: 6px;
+  color: var(--accent);
+}
+
+/* ---------- Process ---------- */
+
+.proc {
+  padding-top: clamp(96px, 12vw, 180px);
+}
+
+.proc-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+}
+.proc-title {
+  font-size: clamp(32px, 4vw, 64px);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+}
+
+.proc-track {
+  position: relative;
+}
+
+.proc-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gutter);
+  border-top: 1px solid var(--line);
+}
+
+/* A blue line draws across the four steps once, on entry. */
+.proc-line {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1100ms var(--ease-in-out) 150ms;
+}
+.proc-track.is-in .proc-line {
+  transform: scaleX(1);
+}
+
+.proc-step {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding-top: 28px;
+  min-height: 260px;
+  opacity: 0.25;
+  transition: opacity 500ms ease;
+  transition-delay: calc(250ms + var(--i) * 220ms);
+}
+.proc-track.is-in .proc-step {
+  opacity: 1;
+}
+
+.proc-node {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  background: var(--black);
+  border: 1px solid var(--accent);
+  transition: background-color 200ms ease;
+  transition-delay: calc(250ms + var(--i) * 220ms);
+}
+.proc-track.is-in .proc-node {
+  background: var(--accent);
+}
+
+.proc-t {
+  font-size: clamp(26px, 2.4vw, 36px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+.proc-d {
+  font-size: 16px;
+  color: var(--fg-2);
+  max-width: 30ch;
+  text-wrap: pretty;
+}
+
+@media (max-width: 960px) {
+  .svc-row {
+    grid-template-columns: 48px minmax(0, 1fr) 16px;
+    row-gap: 12px;
+  }
+  .svc-d {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .svc-icon {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  .proc-steps {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 40px;
+    border-top: 0;
+  }
+  .proc-step {
+    min-height: 0;
+    border-top: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 560px) {
+  .proc-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proc-line {
+    transition: none;
+  }
+  .proc-step,
+  .proc-node {
+    transition-delay: 0ms;
+  }
+}

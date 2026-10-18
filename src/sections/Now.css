@@ -1,0 +1,83 @@
+.now {
+  background: var(--black);
+}
+
+.now-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+
+/* 3 across, then 2 wider cards, so the grid never leaves an orphan. */
+.now-grid > li {
+  grid-column: span 2;
+}
+.now-grid > li:nth-child(n + 4) {
+  grid-column: span 3;
+}
+
+.now-card {
+  position: relative;
+  height: 100%;
+  min-height: 280px;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 14px;
+  padding: 18px 20px 16px;
+  background: var(--panel);
+  border-radius: var(--radius);
+}
+
+.now-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--fg);
+}
+.now-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+}
+
+.now-title {
+  margin-top: 28px;
+  font-size: clamp(24px, 2.2vw, 34px);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  max-width: 16ch;
+}
+
+.now-body {
+  font-size: 16px;
+  color: var(--fg-2);
+  max-width: 40ch;
+  text-wrap: pretty;
+}
+
+.now-idx {
+  justify-self: end;
+  color: var(--fg-4);
+}
+
+@media (max-width: 960px) {
+  .now-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .now-grid > li,
+  .now-grid > li:nth-child(n + 4) {
+    grid-column: span 1;
+  }
+  .now-grid > li:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .now-grid {
+    grid-template-columns: 1fr;
+  }
+  .now-card {
+    min-height: 0;
+  }
+}

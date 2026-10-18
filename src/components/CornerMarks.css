@@ -1,0 +1,41 @@
+.corners {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--fg-4);
+}
+.corner .label {
+  font-size: 10px;
+  color: var(--fg-4);
+}
+
+.corner.tl,
+.corner.tr {
+  top: calc(var(--header-h) + var(--header-inset) * 2);
+}
+.corner.tl,
+.corner.bl {
+  left: var(--header-inset);
+}
+.corner.tr,
+.corner.br {
+  right: var(--header-inset);
+}
+.corner.bl,
+.corner.br {
+  bottom: var(--header-inset);
+}
+
+@media (max-width: 640px) {
+  .corner .label {
+    display: none;
+  }
+}
