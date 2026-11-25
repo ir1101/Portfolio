@@ -7,10 +7,54 @@
 
 .ft-art {
   display: grid;
+  gap: 10px;
+}
+.ft-ascii,
+.ft-canvas {
+  width: 100%;
+  height: clamp(300px, 42vw, 600px);
 }
 .ft-ascii {
-  height: clamp(220px, 36vw, 520px);
   color: rgba(242, 242, 242, 0.62);
+}
+
+.ft-canvas {
+  opacity: 0;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: opacity 700ms ease;
+}
+.ft-canvas.is-ready {
+  opacity: 1;
+}
+.ft-canvas.is-dragging {
+  cursor: grabbing;
+}
+.ft-art.is-static .ft-canvas {
+  cursor: default;
+}
+
+.ft-art-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--fg-4);
+}
+.ft-hint {
+  color: var(--fg-3);
+}
+.ft-hint-touch {
+  display: none;
+}
+@media (hover: none), (pointer: coarse) {
+  .ft-hint-fine {
+    display: none;
+  }
+  .ft-hint-touch {
+    display: inline;
+  }
 }
 
 .ft-info {

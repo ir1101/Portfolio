@@ -58,16 +58,16 @@ export const featured: Featured[] = [
   {
     idx: "W/01",
     name: "Cricket Oracle",
-    tag: "Sport analytics · 2025",
-    desc: "A match-outcome predictor for limited-overs cricket. Ingests ball-by-ball data, engineers innings-state features (run rate trajectory, wickets-in-hand, venue priors), and blends a logistic baseline with a gradient-boosted model. Calibrated probabilities power a chase-difficulty heatmap that updates live ball-by-ball.",
-    stack: ["Python", "Pandas", "XGBoost", "Streamlit"],
+    tag: "Sport analytics · 2026",
+    desc: "A ball-by-ball win-probability model for T20 cricket, trained on every IPL match since 2008. Engineers innings-state features (run rate trajectory, wickets in hand, venue par) and blends a logistic baseline with a monotone LightGBM model, calibrated and tested on a season it never saw. A FastAPI web app replays any match with a chase-difficulty heatmap that updates ball by ball.",
+    stack: ["Python", "LightGBM", "scikit-learn", "FastAPI"],
     specs: [
-      { k: "Accuracy", v: "78.4%" },
-      { k: "Matches", v: "12.1K" },
-      { k: "Features", v: "47" },
+      { k: "Chase AUC", v: "0.94" },
+      { k: "IPL matches", v: "1,195" },
+      { k: "Deliveries", v: "287K" },
     ],
     viz: "cricket",
-    caption: ["Win probability · Inn. 2", "Over 0 → 50", "P(win) = 0.61"],
+    caption: ["Win probability · Inn. 2", "Over 0 → 20", "P(win) = 0.61"],
   },
   {
     idx: "W/02",
@@ -116,9 +116,9 @@ export type IndexItem = {
 export const workIndex: IndexItem[] = [
   {
     title: "Cricket Oracle",
-    excerpt: "Match-outcome predictor for limited-overs cricket — calibrated win probabilities that update ball-by-ball.",
+    excerpt: "Win-probability model for T20 cricket — calibrated odds that update ball by ball, tested on a season it never saw.",
     tags: ["Modeling", "Viz"],
-    kind: "2025",
+    kind: "2026",
     slide: 0,
   },
   {
@@ -173,7 +173,7 @@ export const steps: { n: string; t: string; d: string }[] = [
 ];
 
 export const nowCards: { tag: string; title: string; body: string }[] = [
-  { tag: "Building", title: "A real-time cricket dashboard", body: "Wrapping the Oracle model in a Streamlit app that streams ball-by-ball deltas from an open API." },
+  { tag: "Building", title: "A sharper Cricket Oracle", body: "Testing new features season by season on matches the model never saw, and shipping only what holds up. Latest: a learned resource table that prices in wickets in hand." },
   { tag: "Learning", title: "Causal inference", body: "Working through ‘The Mixtape’ alongside Pearl’s primer — DAGs, IVs, diff-in-diff, and unlearning my reflex to reach for correlation." },
   { tag: "Reading", title: "ESL, slowly", body: "Hastie/Tibshirani/Friedman, with a notebook open. The good kind of hard." },
   { tag: "Listening", title: "Linear Digressions reruns", body: "Old episodes that age surprisingly well. Also way too much Aphex Twin while debugging." },

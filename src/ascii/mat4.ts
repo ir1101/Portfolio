@@ -59,3 +59,20 @@ export function multiply(a: Mat4, b: Mat4): Mat4 {
   }
   return m;
 }
+
+/** Model matrix: rotate by yaw (Y) after pitch (X), about `center`. */
+export function yawPitch(yaw: number, pitch: number, center: number[]): Mat4 {
+  const cy = Math.cos(yaw);
+  const sy = Math.sin(yaw);
+  const cp = Math.cos(pitch);
+  const sp = Math.sin(pitch);
+  // Row-major R = Ry · Rx
+  const r = [cy, sy * sp, sy * cp, 0, cp, -sp, -sy, cy * sp, cy * cp];
+  const m = new Float32Array(16);
+  for (let row = 0; row < 3; row++) {
+    for (let col = 0; col < 3; col++) m[col * 4 + row] = r[row * 3 + col];
+    m[12 + row] = -(r[row * 3] * center[0] + r[row * 3 + 1] * center[1] + r[row * 3 + 2] * center[2]);
+  }
+  m[15] = 1;
+  return m;
+}
